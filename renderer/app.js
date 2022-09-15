@@ -16,6 +16,28 @@ search.addEventListener('keyup', e => {
   })
 })
 
+// Open modal from menu
+ipcRenderer.on('menu-show-modal', () => {
+  showModal.click()
+})
+
+ipcRenderer.on('menu-open-item', () => {
+  items.open()
+})
+
+ipcRenderer.on('menu-open-item-native', () => {
+  items.openNative()
+})
+
+ipcRenderer.on('delete-item', () => {
+  let selected = items.getSelectedItem()
+  items.delete(selected.index)
+})
+
+ipcRenderer.on('menu-search', () => {
+  search.focus()
+})
+
 document.addEventListener('keydown', e=> {
   if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
     items.changeSelection(e.key)

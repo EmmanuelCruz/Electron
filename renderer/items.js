@@ -1,3 +1,4 @@
+const { shell } = require('electron')
 let fs = require('fs')
 let items = document.getElementById('items')
 
@@ -103,3 +104,12 @@ exports.addItem = (item, isNewItem = false) => {
 this.storage.forEach(element => {
   this.addItem(element)
 });
+
+exports.openNative = () => {
+  if(!this.storage.length) return
+
+  let selectedItem = this.getSelectedItem()
+  let contentURL = selectedItem.node.dataset.url
+
+  shell.openExternal(contentURL)
+}
